@@ -1,0 +1,240 @@
+CONFIGURANDO O AMBIENTE
+instalar a extensão Solidity de Juan Blanco
+ir em File/Preferences/File icon theme (deu um bugzinho mas funcionou)
+
+
+
+para iniciar o truffle no gitbash (este comando cria o diretório migrations, um arquivo truffle.js, uma pasta chamada contracts na raiz OU SEJA, CRIA UMA ESTRUTURA PARA O PROJETO)
+truffle init 
+Obs: se não funcionar o comando (se naõ encontrar), tentar
+./node_modules/.bin/truffle init (na raiz do projeto)
+
+para abrir arquivos dentro do gitbash
+nano truffle-config.js
+
+
+para compilar os contratos ir na linha de comando do bash (ganache tem que estar aberta)
+truffle compile
+
+
+para fazer o deploy para a blockchain (folder migrations)
+truffle migrate
+truffle migrate --reset (este é para alocar o contrato em outro endereço da migração anterior - ou seja, para refazer ou fazer uma nova migração)
+
+Para instalar as dependencias (root do projeto)
+npm install
+ou 
+npm i
+Obs: este comando cria a pasta node_modules com as dependencias
+
+npm run start
+rodar o projeto no browser
+
+
+ERROS PARA NÃO COMETER NOVAMENTE
+Ao compilar, aparecia o erro "reading 'addFunction'" era diferença de versões no arquivo truffle-config.js e os contratos
+
+
+PARA TESTAR O CONTRATO NO TRUFFLE CONSOLE
+comando truffle console (entrar no console)
+
+instanciar o contrato (variavel chamada K, isso ocorre de maneira assincrona await)
+k = await KryptoBirdz.deployed()
+
+para buscar valores
+k.name()
+k.symbol()
+
+
+TODOS OS PADROES DO ETHEREUM AQUI
+https://eips.ethereum.org/erc
+
+EIP-721 - NON FUNGIBLE TOKEN STANDARD (RASTREAR E TRANSFERIR NFTS)
+https://eips.ethereum.org/EIPS/eip-721
+
+Dentro da pasta node_modules, há um diretório chamado @openzeppelin/tokens que possuem dependencias prontas dos contratos
+que já tem códigos prontso para nossos nfts, poderiamos simplesmente utilizar o código, mas no curso iremos construir as 
+funções
+
+
+CÓDIGO E SINTAXE----------------------------
+
+"memory" - colocar para armazenar em memória recente
+
+
+
+-----------------------------------------------------------------
+CRIANDO AMBIENTE DE TESTES --------------------------------------
+Para deixar de utilizar o truffle console vamos criar um ambiente de testes (pasta 'test')
+
+1º criei um arquivo chamado KryptoBird.test.js
+
+
+
+
+
+
+-----------------------------------------------------------------
+CURSO GIT-----------------------------------
+https://www.youtube.com/watch?v=kB5e-gTAl_s
+
+AULA 1 - INTRODUÇÃO
+após abrir o terminal, digitar git --help para ver os comandos
+
+para criar um repositório
+clicar com o botão direito em cima da pasta no nosso computador e depois GitBash here (abrir uma linha de comando dentro desta pasta)
+depois digitar "git init" no terminal (vai ser criada uma pasta oculta com o nome .git, sequiser ver ver é só pedir para mostrar itens ocultos)
+
+depois voltar na janela de comandos
+"git status" para ver o status (arquivos que já foram incluidos no comando de versão e quais não foram, ou se algum arquivo foi atualizado)
+No commits yet - significa que não existem versões do código
+untracked files - arquivos não inseridos no controle de versão (o que nós temos agora é que incluir os arquivos no nosso controle de versão)
+
+AULA 2 - Como adicionar arquivos ao controle de versão
+para adicionar o arquivo precisamos colocar o arquivo
+=>>   git add "config.json"
+
+para conferir basta digitar "git status" para ver a mensagem "new file config.json"
+
+para adicionar vários arquivos "git add ." ai todos os arquivos pendentes são aadicionados
+
+para conferir digitar novamente "git status"
+
+AULA 3 - Como criar versões do código com commit
+com os arquivos adicionados (aula anterior) vamos criar a primeria versão com o comando
+
+git commit -m "aqui voce coloca uma mensagem como boa prática, EX commit inicial"
+
+OBS: se for a primeira vez que for rodar o comando no computador, será solicitado que configuremos o git no computador 
+e já recebemos uma mensagem do que precisamos configurar , comandos abaixo
+
+git config --global user.email "williangrios@yahoo.com.br"
+git config --global user.name "Willian Rios"
+
+pronto já está configurado, então precisamos rodar o comando de commit novamente
+git commit -m "aqui voce coloca uma mensagem como boa prática, EX commit inicial"
+
+então receberemos uma mensagem com o status e com os arquivos adicionados
+
+AULA 4 - COMO SUBIR OS ARQUIVOS PARA A NUVEM COM O COMANDO GIT PUSH
+Para enviar a primeira versão do código para o servidor na nuvem
+Git push
+
+Mas não funcionará ser não tivermos configurado o link do nosso projeto na nuvem, se não tiver ainda, precisamos criar no github (clicar no + e new repository), colocamos um nome e descrição (escolher publico ou privado), depois create repository (já temos o link na barra de naevgação)
+
+depois, de posse do link, rodamos o comando
+
+git remote add origin https://github.com/williangrios/from-scratch-to-first-nft-project
+
+mas se não definiu qual branch o código será enviado, não funcionará (OBS: branch são divisões ou versões do código que estão sendo desenvolvidas separadamente)
+para enviar para a master utilizamos o código
+
+git push --set-upstream origin master
+
+AULA 5 - CICLO DE ATUALIZAÇÃO DE CÓDIGO
+criando a versão 2 do código 
+
+para ver se houve atualização do código, digitar
+git status
+
+assim receberei uma lista com os arquivos modificados
+para adicionar todos os arquivos modificados
+git add .
+
+depois roda o comando abaixo novamente para ver se deu certo
+git status
+
+então para criar uma nova versão digitamos
+git commit -m "atualização do arquivo de anotações"
+
+agora so dar push novamente (para enviar as atualizações para o controle de versão)
+git push 
+
+AULA 6 - COMO VERIFICAR HISTÓRICO DE ATUALIZAÇÕES
+só utilizar o comando 
+git reflog
+
+AULA 7 - COMO NAVEGAR ENTRE VERSÕES DO SEU CÓDIGO
+para voltar o código a uma versão anterior (caso tenha um erro no codigo por exemplo)
+git reset --hard 1658aa4 (onde este número é o que aparece nas versões quando se dá o comando da aula passada 'git reflog')
+
+AULA 8 - O QUE SÃO BRANCHES E COMO CRIAR UMA
+Branches (galhos) são caminhos diferentes que você criará  no processo de desenvolvimento
+Normalmente existe uma branch com a versão atualizada/estável do projeto e outras branches para desenvolvimento
+
+comando para ver quais branches existem no projeto e qual está ativa
+git branch 
+
+normalmente a branch secundária é chamada de staging e a estável é a master
+
+para criar uma segunda branch chamada staging
+git branch staging
+
+para mudar entre branches (a que estamos trabalhando está marcada com * e na cor verde)
+git chechout staging
+
+AULA 9 - FAZENDO MERGE
+Antes de fazer o merge para a branch master, primeiro temos que atualizar/puxar o código para a staging porque senão poderemos apagar código anterior da branch principal
+Entãao temos que fazer o seguinte procedimento
+
+entrar na branch principal
+git checkout master
+
+depois puxa as atualizações do servidor para minha maquina local
+git pull
+
+depois podemos mergear com
+git merge staging (estando logado na master)
+
+
+RESUMO DO PROFESSOR
+1 git pull da branch principal
+2 gerar uma nova branch a partir da branch principal
+3 trabalhar na nova branck que criou adicionando funcionalidades
+4 finalizar o trabalho qna branch temporária
+5 git checkout na branch principal
+6 git pull
+7 mergear (unir) o codigo da branch temporária com a branch principal (depois de testar)
+8 git push da branch principal
+
+AULA 10 - PULL REQUEST, UM MERGE DEMOCRATIC
+
+quando um programador precisa autorizar o código do outro para juntar à branch master
+
+o programador que está na branch staging precisa llancar o comando
+git push
+git push --set-upstream origin staging
+
+depois o procedimento continua no site github
+
+AULA 11 - GITIGNORE
+na pasta raíz do projeto e para cria-lo, utilizamos o comando abaixo
+touch .gitignore
+
+assim, será criado um arquivvo chamado .gitignore
+
+ai só preencher o arquivo com os diretórios e arquivos para ignorar
+ex:
+
+segredos/
+fotos.png
+
+ai, ao rodar o comando git status, os arquivos serão ignorados
+
+git init  (inicializa um novo repositório)
+git add .  (adiciona os arquivos atuais ao próximo commit)
+git status  (verificar o status atual dos repositórios git)
+git commit -m "mensagem do commit"  (cria um novo commit com uma mensagem)
+git push  (envia as atualizações para a nuvem na branch atualmente ativa)
+git branch   (permite listar e ver qual branch está ativa atualmente)
+git checkout nome-da-branch   (permite mudar para uma nova branch)
+git checkout -b "nome da branch de origem" "nome da nova branch"   (permite mudar e criar uma nova branch com base em outra)
+git merge "branch a receber merge"   (permite fazer o merge das branch ativa atualmente com outra branch)
+git pull  (atualiza a branch atualmente ativa)
+
+
+-----------------------------------------------------------------
+
+
+Enviando imagens para a nuvem
+site imgbb.com
